@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('master_dasar_hukum_id');
             $table->string('kategori');
             $table->string('kode_rekening');
-            $table->string('nomenklatur');
+            $table->text('nomenklatur');
             $table->integer('user_pembuat');
             $table->timestamps();
         });

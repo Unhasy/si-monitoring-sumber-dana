@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $table->id();
-        $table->string('kode_rekening');
-        $table->string('keterangan');
-        $table->integer('user_pembuat');
-        $table->timestamps();
+        Schema::create('master_sumber_dana', function (Blueprint $table) {
+            $table->id();
+            $table->string('kode_rekening');
+            $table->string('keterangan');
+            $table->integer('user_pembuat');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('master_sumber_dana');
     }
 };
