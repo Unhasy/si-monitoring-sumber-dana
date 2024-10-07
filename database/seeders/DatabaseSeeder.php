@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'ADMIN',
             'password' => 'password123'
         ]);
+
     }
 }
