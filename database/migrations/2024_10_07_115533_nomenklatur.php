@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('kategori');
             $table->string('kode_rekening');
             $table->text('nomenklatur');
-            $table->integer('user_pembuat');
+            $table->integer('user_pembuat')->nullable();
             $table->timestamps();
         });
     }

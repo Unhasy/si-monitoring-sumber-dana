@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('master_sumber_dana', function (Blueprint $table) {
-            $table->string();
+            $table->id();
             $table->string('kode_rekening');
             $table->string('keterangan');
-            $table->integer('user_pembuat');
+            $table->integer('user_pembuat')->nullable();
             $table->timestamps();
         });
     }
