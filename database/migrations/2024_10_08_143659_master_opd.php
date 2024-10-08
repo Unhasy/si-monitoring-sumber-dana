@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_sumber_dana', function (Blueprint $table) {
-            $table->string();
-            $table->string('kode_rekening');
-            $table->string('keterangan');
-            $table->integer('user_pembuat');
-            $table->timestamps();
+        Schema::create('master_opd', function (Blueprint $table) {
+            $table->string('kode_opd')->primary(); // Menggunakan string sebagai ID
+            $table->string('nama_opd'); // Nama pengguna
+            $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_sumber_dana');
+        Schema::dropIfExists('master_opd');
     }
 };

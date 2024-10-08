@@ -17,9 +17,35 @@
     <link href="{{ asset('coreui/fontawesome/css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('coreui/fontawesome/css/brands.css') }}" rel="stylesheet">
     <link href="{{ asset('coreui/fontawesome/css/solid.css') }}" rel="stylesheet">
+    <script src="{{ asset('coreui/js/vue.js') }}"></script>
+    <script src="{{ asset('coreui/js/axios.min.js') }}"></script>
     <style>
         .content-start{
             padding: 20px;
+        }
+        .modal {
+          transition: opacity 0.15s linear;
+          z-index: 1050; /* Pastikan modal berada di atas */
+        }
+        .modal.show {
+          opacity: 1;
+        }
+        
+        .modal-backdrop {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.8); /* Warna gelap */
+          backdrop-filter: blur(5px); /* Efek blur */
+          z-index: 1040; /* Di bawah modal */
+        }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 0.3s ease;
+        }
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
         }
     </style>
 </head>
@@ -61,27 +87,16 @@
     <!-- CoreUI and necessary plugins-->
     <script src="{{ asset('coreui/js/coreui.bundle.js') }}"></script>
     <script src="{{ asset('coreui/vendor/simplebar.min.js') }}"></script>
-    <script src="{{ asset('coreui/js/vue.js') }}"></script>
     <script>
         const header = document.querySelector('header.header');
-
+        
         document.addEventListener('scroll', () => {
             if (header) {
                 header.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0);
             }
         });
-
-        var app3 = new Vue({
-            el: '#app',
-            data: {
-                sidebar_show: true
-            },
-            mounted: function () {
-
-            }
-        })
-
     </script>
+    @yield('scripts')
 </body>
 
 </html>
