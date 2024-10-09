@@ -10,4 +10,12 @@ class MasterNomenklatur extends Model
     use HasFactory;
 
     protected $table = 'master_nomenklatur';
+    protected $fillable = [
+        'master_dasar_hukum_id',
+        'kategori',
+        'kode_rekening',
+        'nomenklatur',
+        'user_pembuat',
+    ];
+
 }

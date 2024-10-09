@@ -10,4 +10,10 @@ class MasterSumberDana extends Model
     use HasFactory;
 
     protected $table = 'master_sumber_dana';
+    protected $fillable = [
+        'kode_rekening',
+        'keterangan',
+        'user_pembuat',
+    ];
+
 }

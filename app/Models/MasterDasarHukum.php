@@ -10,5 +10,4 @@ class MasterDasarHukum extends Model
     use HasFactory;
 
     protected $table = 'master_dasar_hukum';
-
 }
