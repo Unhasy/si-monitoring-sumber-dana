@@ -19,6 +19,8 @@
     <link href="{{ asset('coreui/fontawesome/css/solid.css') }}" rel="stylesheet">
     <script src="{{ asset('coreui/js/vue.js') }}"></script>
     <script src="{{ asset('coreui/js/axios.min.js') }}"></script>
+    <script src="{{ asset('coreui/js/highcharts.js') }}"></script>
+
     <style>
         .content-start{
             padding: 20px;
