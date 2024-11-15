@@ -5,17 +5,17 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NomenklaturController;
 use App\Http\Controllers\SumberdanaController;
+use App\Http\Controllers\RealisasiController;
+use App\Http\Controllers\AuthController;
+
+Route::get('/', [AuthController::class, 'showLoginForm']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// Route::get('/template', function () {
-//     return view('admin.template.layout');
-// });
-// Route::get('/', function () {
-//     return view('admin.dashboard.index');
-// });
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/master/user', [UserController::class, 'index'])->name('master.user');
+Route::get('/master/user', [UserController::class, 'index'])->name('master.user')->middleware('auth');
 Route::get('/master/user/data', [UserController::class, 'getData'])->name('master.user.data');
 Route::post('/master/user', [UserController::class, 'store'])->name('master.user.store');
 Route::get('/master/user/{id}/edit', [UserController::class, 'edit'])->name('master.user.edit');
@@ -38,5 +38,5 @@ Route::put('/master/sumberdana/{id}', [SumberdanaController::class, 'update'])->
 Route::delete('/master/sumberdana/{id}', [SumberdanaController::class, 'destroy'])->name('master.sumberdana.delete');
 
 Route::get('/master/dasarhukum', [DashboardController::class, 'index'])->name('master.dasarhukum');
-Route::get('/monitoring', [DashboardController::class, 'index'])->name('realisasi');
-Route::get('/realisasi', [DashboardController::class, 'index'])->name('monitoring');
+Route::get('/laporan', [DashboardController::class, 'index'])->name('laporan');
+Route::get('/realisasi', [RealisasiController::class, 'index'])->name('realisasi');

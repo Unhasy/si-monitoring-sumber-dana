@@ -46,12 +46,12 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('realisasi') }}">
-            <i class="fa-solid fa-pen-to-square"></i> &nbsp; Input Realisasi
+            <i class="fa-solid fa-pen-to-square"></i> &nbsp; Realisasi Sumber Dana
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('monitoring') }}">
-            <i class="fa-solid fa-chart-simple"></i> &nbsp; Monitoring Sumber Dana
+        <a class="nav-link" href="{{ route('laporan') }}">
+            <i class="fa-solid fa-chart-simple"></i> &nbsp; Laporan
         </a>
     </li>
 </ul>
