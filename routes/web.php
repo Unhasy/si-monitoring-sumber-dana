@@ -40,3 +40,5 @@ Route::delete('/master/sumberdana/{id}', [SumberdanaController::class, 'destroy'
 Route::get('/master/dasarhukum', [DashboardController::class, 'index'])->name('master.dasarhukum');
 Route::get('/laporan', [DashboardController::class, 'index'])->name('laporan');
 Route::get('/realisasi', [RealisasiController::class, 'index'])->name('realisasi');
+Route::get('/realisasi/data', [RealisasiController::class, 'data'])->name('realisasi.data');
+Route::get('/realisasi/sumberdana/{id}/edit', [RealisasiController::class, 'sumberdana'])->name('realisasi.sumberdana');
