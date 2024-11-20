@@ -29,7 +29,9 @@
                         <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                     </td>
-                    <td :style="getStyle(item.kategori)"></td>
+                    <td :style="getStyle(item.kategori)">
+                        <span style="float: right">@{{ (item.realisasi/item.pagu * 100).toFixed(2)}} %</span>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -169,24 +171,13 @@
                     nomenklatur: '',
                 };
             },
-            // saveData() {
-            //     if(this.form.role=='ADMIN') {
-            //         this.form.kode_opd = ''
-            //     }
-            //     if (this.form.id) {
-            //         axios.put(`/master/nomenklatur/${this.form.id}`, this.form)
-            //             .then(response => {
-            //                 this.fetchData();
-            //                 this.modalVisible = false;
-            //             });
-            //     } else {
-            //         axios.post('/master/nomenklatur', this.form)
-            //             .then(response => {
-            //                 this.fetchData();
-            //                 this.modalVisible = false;
-            //             });
-            //     }
-            // },
+            saveData() {
+                axios.post('/realisasi/sumberdana', {sumberdanas:this.sumberdanas})
+                    .then(response => {
+                        this.fetchData();
+                        this.modalVisible = false;
+                    });
+            },
             editData(id, item) {
                 axios.get(`/realisasi/sumberdana/${id}/edit`).then(response => {
                     this.sumberdanas = response.data;

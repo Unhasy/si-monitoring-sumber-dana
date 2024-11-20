@@ -42,3 +42,4 @@ Route::get('/laporan', [DashboardController::class, 'index'])->name('laporan');
 Route::get('/realisasi', [RealisasiController::class, 'index'])->name('realisasi');
 Route::get('/realisasi/data', [RealisasiController::class, 'data'])->name('realisasi.data');
 Route::get('/realisasi/sumberdana/{id}/edit', [RealisasiController::class, 'sumberdana'])->name('realisasi.sumberdana');
+Route::post('/realisasi/sumberdana', [RealisasiController::class, 'store'])->name('realisasi.store');

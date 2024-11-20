@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\RenjaPaguAnggaranRealisasi;
 
 
 class RealisasiController extends Controller
@@ -88,5 +88,21 @@ class RealisasiController extends Controller
             return response()->json(['message' => 'Sumberdana not found'], 404);
         }
         return response()->json($data);
+    }
+
+    public function store(Request $request)
+    {
+        foreach ($request->sumberdanas as $row) {
+           if($row['realisasi']!=null){
+                $dana = RenjaPaguAnggaranRealisasi::find($row['id']);
+                $dana->update([
+                    'realisasi' => $row['realisasi'],
+                ]); 
+           }
+        }
+        // Mengembalikan respons JSON
+        return response()->json([
+            'message' => 'Realisasi berhasil di perbarui.',
+        ], 201);
     }
 }
