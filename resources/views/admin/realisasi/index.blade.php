@@ -21,9 +21,9 @@
                     </td>
                     <td :style="getStyle(item.kategori)">
                         @{{ formatNumber(item.realisasi) }}
-                        <button
+                        <button style="float:right"
                         v-if="item.kategori === 'SUB KEGIATAN'"
-                        @click="editData(item.id)"
+                        @click="editData(item.id, item)"
                         class="btn btn-warning btn-sm"
                         >
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -37,23 +37,59 @@
     <!-- Modal for Create/Edit  -->
     <div v-if="modalVisible" class="modal-backdrop fade show"></div>
     <div class="modal fade" :class="{ show: modalVisible }" :style="{ display: modalVisible ? 'block' : 'none' }" aria-hidden="!modalVisible" id="staticBackdrop" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Sumberdana</h5>
                 </div>
                 <form @submit.prevent="saveData">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>Kode Rekening</label>
-                            <input type="text" v-model="form.kode_rekening" class="form-control" required>
-                        </div>
+                        <table class="table">
+                            <tr>
+                                <th>Kode Sub Kegiatan</th>
+                                <td>@{{sub_kegiatan.kode_rekening}}</td>
+                            </tr>
+                            <tr>
+                                <th>Nama Sub Kegiatan</th>
+                                <td>@{{sub_kegiatan.nomenklatur}}</td>
+                            </tr>
+                        </table>
                         <br>
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <input type="text" v-model="form.keterangan" class="form-control" required>
-                        </div>
-                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Sumber Dana</th>
+                                    <th>Pagu</th>
+                                    <th>Realisasi</th>
+                                    <th>Presentase</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(dana,index) in sumberdanas">
+                                    <td>@{{index+1}}</td>
+                                    <td>@{{dana.kode_rekening}} - @{{dana.keterangan}}</td>
+                                    <td>
+                                        @{{formatNumber(dana.pagu)}}
+                                    </td>
+                                    <td>
+                                       <input type="number" v-model="dana.realisasi" class="form-control text-end" placeholder="Realisasi ...">
+                                    </td>
+                                    <td>
+                                        @{{ (dana.realisasi/dana.pagu * 100).toFixed(2)}} %
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="font-weight: bold">
+                                  <td colspan="2">Total</td>
+                                  <td>@{{formatNumber(sub_kegiatan.pagu)}}</td>
+                                  <td> <span style="float: right;">@{{formatNumber(sub_kegiatan.realisasi)}}</span></td>
+                                  <td>@{{ (sub_kegiatan.realisasi/sub_kegiatan.pagu * 100).toFixed(2)}} %</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -80,13 +116,26 @@
             modalVisible: false,
             keyword:"",
             kode_opd: kodeOPD,
-            form: {
-                id: null,
-                master_dasar_hukum_id: 1,
-                kategori: '',
-                kode_rekening: '',
-                nomenklatur: '',
-            },
+            sumberdanas: [],
+            sub_kegiatan:{
+                pagu:0,
+                realisasi:0
+            }
+        },
+        watch: {
+            sumberdanas: {
+                handler(newValue, oldValue) {
+                    let realisasi = 0;
+                    for (let index = 0; index < this.sumberdanas.length; index++) {
+                        const element = this.sumberdanas[index];
+                        if(element.realisasi !== null) {
+                            realisasi += parseInt(element.realisasi)
+                        }
+                    }
+                    this.sub_kegiatan.realisasi = realisasi
+                },
+                deep: true
+            }
         },
         mounted() {
             this.fetchData();
@@ -138,9 +187,10 @@
             //             });
             //     }
             // },
-            editData(id) {
+            editData(id, item) {
                 axios.get(`/realisasi/sumberdana/${id}/edit`).then(response => {
-                    this.form = response.data;
+                    this.sumberdanas = response.data;
+                    this.sub_kegiatan = item
                     this.modalVisible = true;
                 });
             },
