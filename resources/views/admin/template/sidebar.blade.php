@@ -17,14 +17,14 @@
                         User
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('master.dasarhukum') }}">
                     <span class="nav-icon">
                         <span class="nav-icon-bullet"></span>
                     </span> 
                         Dasar Hukum
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('master.nomenklatur') }}">
                     <span class="nav-icon">
@@ -51,7 +51,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('laporan') }}">
-            <i class="fa-solid fa-chart-simple"></i> &nbsp; Laporan
+            <i class="fa-solid fa-chart-simple"></i> &nbsp; Laporan & Monitoring
         </a>
     </li>
 </ul>

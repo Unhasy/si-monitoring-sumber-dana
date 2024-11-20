@@ -20,7 +20,7 @@
     <script src="{{ asset('coreui/js/vue.js') }}"></script>
     <script src="{{ asset('coreui/js/axios.min.js') }}"></script>
     <script src="{{ asset('coreui/js/highcharts.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .content-start{
             padding: 20px;
@@ -97,6 +97,7 @@
                 header.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0);
             }
         });
+        import Swal from 'sweetalert2'
     </script>
     @yield('scripts')
 </body>

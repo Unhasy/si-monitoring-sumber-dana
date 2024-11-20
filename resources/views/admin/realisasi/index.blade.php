@@ -176,6 +176,13 @@
                     .then(response => {
                         this.fetchData();
                         this.modalVisible = false;
+                        console.log('response', response)
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: response.data.message,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        })
                     });
             },
             editData(id, item) {

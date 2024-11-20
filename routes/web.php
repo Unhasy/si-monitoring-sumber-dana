@@ -7,6 +7,7 @@ use App\Http\Controllers\NomenklaturController;
 use App\Http\Controllers\SumberdanaController;
 use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', [AuthController::class, 'showLoginForm']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -38,8 +39,9 @@ Route::put('/master/sumberdana/{id}', [SumberdanaController::class, 'update'])->
 Route::delete('/master/sumberdana/{id}', [SumberdanaController::class, 'destroy'])->name('master.sumberdana.delete');
 
 Route::get('/master/dasarhukum', [DashboardController::class, 'index'])->name('master.dasarhukum');
-Route::get('/laporan', [DashboardController::class, 'index'])->name('laporan');
 Route::get('/realisasi', [RealisasiController::class, 'index'])->name('realisasi');
 Route::get('/realisasi/data', [RealisasiController::class, 'data'])->name('realisasi.data');
 Route::get('/realisasi/sumberdana/{id}/edit', [RealisasiController::class, 'sumberdana'])->name('realisasi.sumberdana');
 Route::post('/realisasi/sumberdana', [RealisasiController::class, 'store'])->name('realisasi.store');
+
+Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
