@@ -19,17 +19,17 @@
                     <td :style="getStyle(item.kategori)" class="text-end">
                         @{{ formatNumber(item.pagu) }}
                     </td>
-                    <td :style="getStyle(item.kategori)">
+                    <td :style="getStyle(item.kategori)" class="text-end">
                         @{{ formatNumber(item.realisasi) }}
-                        <button style="float:right"
-                        v-if="item.kategori === 'SUB KEGIATAN'"
-                        @click="editData(item.id, item)"
-                        class="btn btn-warning btn-sm"
+                        <button
+                            v-if="item.kategori === 'SUB KEGIATAN'"
+                            @click="editData(item.id, item)"
+                            class="btn btn-warning btn-sm"
                         >
-                        <i class="fa-solid fa-pen-to-square"></i>
+                            <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                     </td>
-                    <td :style="getStyle(item.kategori)">
+                    <td :style="getStyle(item.kategori)" class="text-end">
                         <span style="float: right">@{{ (item.realisasi/item.pagu * 100).toFixed(2)}} %</span>
                     </td>
                 </tr>
@@ -192,14 +192,6 @@
                     this.modalVisible = true;
                 });
             },
-            // deleteData(id) {
-            //     if (confirm('Are you sure you want to delete this data?')) {
-            //         axios.delete(`/master/nomenklatur/${id}`).then(response => {
-            //             this.fetchData();
-            //         });
-            //     }
-            // }
-
             getStyle(kategori) {
                 switch (kategori) {
                     case "URUSAN":

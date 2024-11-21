@@ -45,3 +45,4 @@ Route::get('/realisasi/sumberdana/{id}/edit', [RealisasiController::class, 'sumb
 Route::post('/realisasi/sumberdana', [RealisasiController::class, 'store'])->name('realisasi.store');
 
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+Route::get('/laporan/data', [LaporanController::class, 'data'])->name('laporan.data');
