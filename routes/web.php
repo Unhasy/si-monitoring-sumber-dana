@@ -41,8 +41,12 @@ Route::delete('/master/sumberdana/{id}', [SumberdanaController::class, 'destroy'
 Route::get('/master/dasarhukum', [DashboardController::class, 'index'])->name('master.dasarhukum');
 Route::get('/realisasi', [RealisasiController::class, 'index'])->name('realisasi');
 Route::get('/realisasi/data', [RealisasiController::class, 'data'])->name('realisasi.data');
+Route::get('/realisasi/data-admin', [RealisasiController::class, 'dataAdmin'])->name('realisasi.data-admin');
+Route::get('/realisasi/admin', [RealisasiController::class, 'indexAdmin'])->name('realisasi.admin');
 Route::get('/realisasi/sumberdana/{id}/edit', [RealisasiController::class, 'sumberdana'])->name('realisasi.sumberdana');
 Route::post('/realisasi/sumberdana', [RealisasiController::class, 'store'])->name('realisasi.store');
 
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
 Route::get('/laporan/data', [LaporanController::class, 'data'])->name('laporan.data');
+Route::get('/laporan/admin', [LaporanController::class, 'indexAdmin'])->name('laporan.admin');
+Route::get('/laporan/data-admin', [LaporanController::class, 'dataAdmin'])->name('laporan.data-admin');

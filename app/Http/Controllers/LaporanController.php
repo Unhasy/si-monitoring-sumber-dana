@@ -17,6 +17,10 @@ class LaporanController extends Controller
     {
         return view('admin.laporan.index');
     }
+    public function indexAdmin()
+    {
+        return view('admin.laporan.index-admin');
+    }
     public function data(Request $request){
         $kode_opd = $request->get('kode_opd') ? $request->get('kode_opd') : Auth::user()->kode_opd;
         $renjaOPD = DB::table('renja_opd')
@@ -55,6 +59,19 @@ class LaporanController extends Controller
         $total = DB::select($queryTotal);
         $response['data'] = $data;
         $response['total'] = $total;
+        return response()->json($response);
+    }
+    public function dataAdmin(Request $request){
+        $query = "
+                    select msd.kode_rekening, msd.keterangan, sum(rpar.pagu) as total_pagu, sum(rpar.realisasi) as total_realisasi from renja_pagu_anggaran_realisasi rpar 
+                    join renja_data rd on rd.id = rpar.renja_data_id
+                    join master_sumber_dana msd on msd.id = rpar.sumber_dana_id
+                    group by msd.kode_rekening, msd.keterangan
+                    order by msd.kode_rekening
+                ";
+        $data = DB::select($query);
+        
+        $response['data'] = $data;
         return response()->json($response);
     }
 }

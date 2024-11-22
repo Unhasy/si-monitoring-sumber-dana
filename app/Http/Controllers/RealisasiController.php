@@ -17,6 +17,10 @@ class RealisasiController extends Controller
     {
         return view('admin.realisasi.index');
     }
+    public function indexAdmin()
+    {
+        return view('admin.realisasi.index-admin');
+    }
     public function data(Request $request){
         $kode_opd = $request->get('kode_opd') ? $request->get('kode_opd') : Auth::user()->kode_opd;
         $renjaOPD = DB::table('renja_opd')
@@ -75,6 +79,28 @@ class RealisasiController extends Controller
             ];
         }
         return response()->json($dataArray);
+    }
+    
+    public function dataAdmin(Request $request){
+        $query = "
+                    select mo.kode_opd, nama_opd,
+                    (
+                        select sum(rpar.pagu) from renja_opd ro 
+                        join renja_data rd on rd.renja_opd_id = ro.id
+                        join renja_pagu_anggaran_realisasi rpar on rpar.renja_data_id = rd.id
+                        where ro.opd_id = mo.kode_opd COLLATE utf8mb4_unicode_ci
+                    ) pagu,
+                    (
+                        select sum(rpar.realisasi) from renja_opd ro 
+                        join renja_data rd on rd.renja_opd_id = ro.id
+                        join renja_pagu_anggaran_realisasi rpar on rpar.renja_data_id = rd.id
+                        where ro.opd_id = mo.kode_opd COLLATE utf8mb4_unicode_ci
+                    ) realisasi
+                    from master_opd mo 
+                    order by mo.kode_opd asc
+                ";
+        $data = DB::select($query);
+        return response()->json($data);
     }
 
     public function sumberdana($id)

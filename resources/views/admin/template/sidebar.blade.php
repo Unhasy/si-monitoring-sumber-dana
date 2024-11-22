@@ -17,14 +17,6 @@
                         User
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{ route('master.dasarhukum') }}">
-                    <span class="nav-icon">
-                        <span class="nav-icon-bullet"></span>
-                    </span> 
-                        Dasar Hukum
-                </a>
-            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('master.nomenklatur') }}">
                     <span class="nav-icon">
@@ -45,13 +37,31 @@
         </ul>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('realisasi') }}">
-            <i class="fa-solid fa-pen-to-square"></i> &nbsp; Realisasi Sumber Dana
-        </a>
+        <?php 
+            if(Auth::user()->role=='ADMIN'){ 
+        ?>
+            <a class="nav-link" href="{{ route('realisasi.admin') }}">
+                <i class="fa-solid fa-pen-to-square"></i> &nbsp; Realisasi Sumber Dana
+            </a>
+        <?php } else { ?>
+            <a class="nav-link" href="{{ route('realisasi') }}">
+                <i class="fa-solid fa-pen-to-square"></i> &nbsp; Realisasi Sumber Dana
+            </a>
+        <?php } ?>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('laporan') }}">
-            <i class="fa-solid fa-chart-simple"></i> &nbsp; Laporan & Monitoring
-        </a>
-    </li>
+    <?php 
+        if(Auth::user()->role=='ADMIN'){ 
+    ?>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('laporan.admin') }}">
+                <i class="fa-solid fa-chart-simple"></i> &nbsp; Laporan & Monitoring
+            </a>
+        </li>
+        <?php } else { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('laporan') }}">
+                    <i class="fa-solid fa-chart-simple"></i> &nbsp; Laporan & Monitoring
+                </a>
+            </li>
+    <?php } ?>
 </ul>
